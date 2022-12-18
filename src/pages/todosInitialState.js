@@ -1,7 +1,7 @@
-const initialState = {
+const todosInitialState = {
   lastTodoListId: 3,
-  todoLists: {
-    1: {
+  todoLists: [
+    {
       id: 1,
       name: "Shopping",
       todos: {
@@ -17,10 +17,14 @@ const initialState = {
           description: "Watermelon",
           done: false,
         },
+        4: {
+          description: "Coconut",
+          done: false,
+        },
       },
     },
-    2: {
-      id: 1,
+    {
+      id: 2,
       name: "Homework",
       todos: {
         1: {
@@ -33,9 +37,8 @@ const initialState = {
         },
       },
     },
-    3: {
-      id: 1,
-      name: "Xmas Gifts",
+    {
+      name: "XmasGift",
       todos: {
         1: {
           description: "Macbook",
@@ -51,6 +54,7 @@ const initialState = {
         },
       },
     },
-  },
+  ],
 }
-export default initialState
+
+export default todosInitialState
