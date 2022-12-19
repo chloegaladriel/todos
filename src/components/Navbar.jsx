@@ -1,22 +1,13 @@
-import classNames from "classnames"
-
 import Header from "./Header"
-
 import Optionsbar from "./Optionsbar"
 
 const Navbar = (props) => {
-  const { className, ...otherProps } = props
+  const { state, handleAddTodoList } = props
 
   return (
-    <nav
-      {...otherProps}
-      className={classNames(
-        "flex flex-col overflow-scroll sticky top-1 bg-white border-b",
-        className
-      )}
-    >
+    <nav className="flex flex-col overflow-scroll sticky top-1 bg-white border-b">
       <div>
-        <Header></Header>
+        <Header state={state} handleAddTodoList={handleAddTodoList} />
       </div>
       <div>
         <Optionsbar />

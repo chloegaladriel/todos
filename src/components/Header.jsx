@@ -1,18 +1,22 @@
-import todosInitialState from "../pages/todosInitialState"
 import Button from "./Button"
-import LinkNext from "./Link"
 
-const Header = () => {
+const Header = (props) => {
+  const { state, handleAddTodoList } = props
+
   return (
     <>
-      {Object.entries(todosInitialState.todoLists).map(([headerId, header]) => (
-        <Button key={headerId} hasBorderFirst>
-          {header.name}
+      {state.todoLists.map((todoList) => (
+        <Button key={todoList.id} hasBorderFirst>
+          {todoList.name}-{todoList.id}
         </Button>
       ))}
 
-      <Button hasBorder className="ml-4">
-        <LinkNext href="/addtodo">+</LinkNext>
+      <Button
+        hasBorder
+        className="ml-4"
+        onClick={() => handleAddTodoList("Addtodo")}
+      >
+        +
       </Button>
     </>
   )

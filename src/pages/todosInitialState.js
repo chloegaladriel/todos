@@ -1,8 +1,7 @@
 const todosInitialState = {
-  lastTodoListId: 3,
   todoLists: [
     {
-      id: 1,
+      id: 0,
       name: "Shopping",
       todos: {
         1: {
@@ -24,7 +23,7 @@ const todosInitialState = {
       },
     },
     {
-      id: 2,
+      id: 1,
       name: "Homework",
       todos: {
         1: {
@@ -38,6 +37,7 @@ const todosInitialState = {
       },
     },
     {
+      id: 2,
       name: "XmasGift",
       todos: {
         1: {
