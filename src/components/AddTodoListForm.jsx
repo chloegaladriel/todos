@@ -1,24 +1,25 @@
 import { Form, Formik } from "formik"
-import { setState, useCallback } from "react"
 import Button from "./Button"
 import FormField from "./FormField"
 
-const AddTodoListForm = () => {
+const AddTodoListForm = (props) => {
+  const { onSubmit } = props
   const initialValues = {
-    description: "",
+    name: "",
   }
-  const handleSubmit = useCallback((values, { resetForm }) => {
-    setState((current) => [...current, values])
+  const handleSubmit = (values, { resetForm }) => {
+    onSubmit(values.name)
+
     resetForm()
-  }, [])
+  }
 
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit}>
       <Form className="flex flex-col gap-4">
         <FormField
           label="Add todo"
-          name="description"
-          placeholder="Enter todo"
+          name="name"
+          placeholder="Todo's decription"
           type="text"
         />
 

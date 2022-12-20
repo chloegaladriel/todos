@@ -1,8 +1,10 @@
 const todosInitialState = {
   todoLists: [
     {
-      id: 0,
+      id: 1,
       name: "Shopping",
+      totalTodos: 4,
+      completedTodos: 2,
       todos: {
         1: {
           description: "Mushrooms",
@@ -23,8 +25,10 @@ const todosInitialState = {
       },
     },
     {
-      id: 1,
+      id: 2,
       name: "Homework",
+      totalTodos: 2,
+      completedTodos: 1,
       todos: {
         1: {
           description: "Mathematics",
@@ -37,8 +41,10 @@ const todosInitialState = {
       },
     },
     {
-      id: 2,
+      id: 3,
       name: "XmasGift",
+      totalTodos: 3,
+      completedTodos: 0,
       todos: {
         1: {
           description: "Macbook",
