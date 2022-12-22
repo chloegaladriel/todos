@@ -1,4 +1,4 @@
-const todoLists = [
+const initialTodoLists = [
   {
     id: 0,
     name: "Shopping",
@@ -36,4 +36,4 @@ const todoLists = [
   },
 ]
 
-export default todoLists
+export default initialTodoLists

@@ -3,11 +3,12 @@ import classNames from "classnames"
 import Button from "./Button"
 
 const TodoListTab = (props) => {
-  const { className, state, currentTodoListIndex } = props
+  const { className, todoLists, currentTodoListIndex, handleRemoveTodoList } = props
 
   return (
     <>
-      {Object.entries(state[currentTodoListIndex].todos).map(
+    
+      {Object.entries(todoLists[currentTodoListIndex].todos).map(
         ([todoId, todo]) => (
           <ul key={todoId}>
             <li
@@ -22,9 +23,6 @@ const TodoListTab = (props) => {
                 checked={todo.done}
               />
               {todo.description}
-              <Button variant="icon" className="ml-auto">
-                <TrashIcon className="h-6 w-6 hidden group-hover:block" />
-              </Button>
             </li>
           </ul>
         )
