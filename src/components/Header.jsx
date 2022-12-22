@@ -18,7 +18,7 @@ const Header = (props) => {
 
   return (
     <div className="flex flex-row items-center overflow-x-scroll sticky top-0 bg-white">
-      {state.todoLists.map((todoList, todoListIndex) => (
+      {state.map((todoList, todoListIndex) => (
         <Button
           key={todoList.id}
           hasBorderFirst

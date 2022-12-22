@@ -7,7 +7,7 @@ const TodoListTab = (props) => {
 
   return (
     <>
-      {Object.entries(state.todoLists[currentTodoListIndex].todos).map(
+      {Object.entries(state[currentTodoListIndex].todos).map(
         ([todoId, todo]) => (
           <ul key={todoId}>
             <li
