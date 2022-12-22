@@ -9,10 +9,12 @@ const Navbar = (props) => {
     isOpen,
     setCurrentTodoListIndex,
     currentTodoListIndex,
+    setIsActive,
+    isActive,
   } = props
 
   return (
-    <nav className="flex flex-col overflow-scroll sticky top-1 bg-white border-b">
+    <nav className="flex flex-col sticky top-1 bg-white border-b">
       <div>
         <Header
           state={state}
@@ -21,6 +23,8 @@ const Navbar = (props) => {
           isOpen={isOpen}
           onClick={setCurrentTodoListIndex}
           currentTodoListIndex={currentTodoListIndex}
+          setIsActive={setIsActive}
+          isActive={isActive}
         />
       </div>
       <div>
