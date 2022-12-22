@@ -1,7 +1,7 @@
 import classNames from "classnames"
 
 const variants = {
-  primary: "text-lg font-bold px-4 py-2 active:bg-slate-50",
+  primary: "text-lg font-bold px-4 py-2 active:bg-slate-50 ",
   secondary: "text-lg font-bold py-2 active:bg-slate-50",
   submit: "border-2",
 }

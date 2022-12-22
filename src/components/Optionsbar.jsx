@@ -6,7 +6,9 @@ import {
 } from "@heroicons/react/24/solid"
 import Button from "./Button"
 
-const Optionsbar = () => {
+const Optionsbar = (props) => {
+  const { handleRemoveTodoList, selectedTab } = props
+
   return (
     <div className="flex gap-4 items-center border-t px-4 py-2">
       <div className="flex items-center gap-5 justify-between">
