@@ -2,21 +2,22 @@ import { useState } from "react"
 import Modal from "../components/Modal"
 import Navbar from "../components/Navbar"
 import TodoListTab from "../components/TodoListTab"
-import todosInitialState from "./todosInitialState"
+import todoLists from "./todosInitialState"
 
 const App = () => {
-  const [state, setState] = useState(todosInitialState)
+  const [state, setState] = useState(todoLists)
   const [isOpen, setIsOpen] = useState(false)
   const [currentTodoListIndex, setCurrentTodoListIndex] = useState(0)
+  const [isActive, setIsActive] = useState(0)
 
   const handleAddTodoList = (name) => {
     const getLastId = () => {
-      return state.todoLists[state.todoLists.length - 1].id
+      todoLists[todoLists.length - 1].id
     }
     setState({
       ...state,
       todoLists: [
-        ...state.todoLists,
+        ...todoLists,
         {
           name,
           todos: {},
@@ -26,14 +27,23 @@ const App = () => {
     })
   }
 
+  const handleRemoveTodoList = (id) =>
+    setState({
+      ...state,
+      todoLists: todoLists.filter((todoList) => todoList.id !== id),
+    })
+
   return (
     <>
       <Navbar
         state={state}
         handleAddTodoList={handleAddTodoList}
+        handleRemoveTodoList={handleRemoveTodoList}
         setIsOpen={setIsOpen}
         isOpen={isOpen}
         setCurrentTodoListIndex={setCurrentTodoListIndex}
+        setIsActive={setIsActive}
+        isActive={isActive}
       />
 
       <TodoListTab state={state} currentTodoListIndex={currentTodoListIndex} />
