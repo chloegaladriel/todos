@@ -1,12 +1,14 @@
 import { useState } from "react"
-import Modal from "../components/Modal"
-import Header from "../components/Navbar"
-import TodoList from "../components/TodoList"
 import initialTodoLists from "../pages/todosInitialState"
+import AddTodoListModal from "./AddTodoListModal"
+import AddTodoModal from "./AddTodoModal"
+import Header from "./Navbar"
+import TodoList from "./TodoList"
 
 const Container = () => {
   const [todoLists, setTodoLists] = useState(initialTodoLists)
-  const [isOpen, setIsOpen] = useState(false)
+  const [addTodoListModalOpen, setAddTodoListModalOpen] = useState(false)
+  const [addTodoModalOpen, setAddTodoModalOpen] = useState(false)
   const [currentTodoListIndex, setCurrentTodoListIndex] = useState(0)
   const [selectedTab, setSelectedTab] = useState(0)
 
@@ -24,9 +26,20 @@ const Container = () => {
   }
 
   const handleRemoveTodoList = (id) => {
-    setTodoLists(todoLists.filter((todoList) => todoList.id !== id))
+    setTodoLists([...todoLists].filter((todoList) => todoList.id !== id))
+  }
 
-    //todoList.id === currentTodoListIndex ? setCurrentTodoListIndex(null) : null;
+  const handleAddTodo = (todoListId, description) => {
+    const todoList = todoLists.find((todo) => todo.id === todoListId)
+
+    if (todoList) {
+      const newTodo = {
+        id: todoList.todos.length,
+        description: description,
+        done: false,
+      }
+      todoList.todos.push(newTodo)
+    }
   }
 
   //console.log(`selected tab ${selectedTab}`)
@@ -37,9 +50,12 @@ const Container = () => {
         todoLists={todoLists}
         handleAddTodoList={handleAddTodoList}
         handleRemoveTodoList={handleRemoveTodoList}
-        setIsOpen={setIsOpen}
-        isOpen={isOpen}
+        setAddTodoListModalOpen={setAddTodoListModalOpen}
+        addTodoListModalOpen={addTodoListModalOpen}
+        addTodoModalOpen={addTodoModalOpen}
+        setAddTodoModalOpen={setAddTodoModalOpen}
         setCurrentTodoListIndex={setCurrentTodoListIndex}
+        currentTodoListIndex={currentTodoListIndex}
         selectedTab={selectedTab}
         setSelectedTab={setSelectedTab}
       />
@@ -47,9 +63,26 @@ const Container = () => {
       <TodoList
         todoLists={todoLists}
         currentTodoListIndex={currentTodoListIndex}
+        handleRemoveTodoList={handleRemoveTodoList}
+        selectedTab={selectedTab}
       />
+      <div>
+        {addTodoListModalOpen && (
+          <AddTodoListModal
+            setAddTodoListModalOpen={setAddTodoListModalOpen}
+            onSubmit={handleAddTodoList}
+          />
+        )}
+      </div>
 
-      {isOpen && <Modal setIsOpen={setIsOpen} onSubmit={handleAddTodoList} />}
+      <div>
+        {addTodoModalOpen && (
+          <AddTodoModal
+            setAddTodoModalOpen={setAddTodoModalOpen}
+            onSubmit={handleAddTodo}
+          />
+        )}
+      </div>
     </>
   )
 }

@@ -3,21 +3,21 @@ import * as yup from "yup"
 import Button from "./Button"
 import FormField from "./FormField"
 
-const AddTodoListForm = (props) => {
+const AddTodoForm = (props) => {
   const { onSubmit } = props
 
   const initialValues = {
-    name: "",
+    description: "",
   }
 
   const handleSubmit = (values, { resetForm }) => {
-    onSubmit(values.name)
+    onSubmit(values.description)
 
     resetForm()
   }
 
   const validationSchema = yup.object({
-    name: yup.string().min(1).label("name"),
+    description: yup.string().min(1).label("description"),
   })
 
   return (
@@ -28,9 +28,9 @@ const AddTodoListForm = (props) => {
     >
       <Form className="flex flex-col gap-4">
         <FormField
-          label="Add todo list"
-          name="name"
-          placeholder="Todo list's name"
+          label="Add todo"
+          name="description"
+          placeholder="Todo's decription"
           type="text"
         />
 
@@ -46,4 +46,4 @@ const AddTodoListForm = (props) => {
   )
 }
 
-export default AddTodoListForm
+export default AddTodoForm

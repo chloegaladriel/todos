@@ -1,18 +1,17 @@
 import { PlusIcon } from "@heroicons/react/24/solid"
 import classNames from "classnames"
 import Button from "./Button"
-import Modal from "./Modal"
 import Optionsbar from "./Optionsbar"
 
 const Header = (props) => {
   const {
     todoLists,
-    handleAddTodoList,
-    setIsOpen,
-    isOpen,
+    setAddTodoListModalOpen,
+    setAddTodoModalOpen,
     selectedTab,
     setSelectedTab,
     setCurrentTodoListIndex,
+    currentTodoListIndex,
   } = props
 
   const PERCENTAGE_BASE = 100
@@ -55,17 +54,21 @@ const Header = (props) => {
           </Button>
         ))}
         <div>
-          <Button hasBorder className="ml-4" onClick={() => setIsOpen(true)}>
+          <Button
+            hasBorder
+            className="ml-4"
+            onClick={() => setAddTodoListModalOpen(true)}
+          >
             <PlusIcon className="h-6 w-6" />
             <div className="w-full mt-2 h-2 flex"></div>
           </Button>
-          {isOpen && (
-            <Modal onSubmit={handleAddTodoList} setIsOpen={setIsOpen} />
-          )}
         </div>
       </div>
       <div>
-        <Optionsbar />
+        <Optionsbar
+          currentTodoListIndex={currentTodoListIndex}
+          setAddTodoModalOpen={setAddTodoModalOpen}
+        />
       </div>
     </nav>
   )
