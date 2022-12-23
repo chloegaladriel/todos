@@ -2,7 +2,7 @@ import { useState } from "react"
 import initialTodoLists from "../pages/todosInitialState"
 import AddTodoListModal from "./AddTodoListModal"
 import AddTodoModal from "./AddTodoModal"
-import Header from "./Navbar"
+import Navbar from "./Navbar"
 import TodoList from "./TodoList"
 
 const Container = () => {
@@ -42,11 +42,21 @@ const Container = () => {
     }
   }
 
-  //console.log(`selected tab ${selectedTab}`)
+  const completedTodo = (id) => {
+    setTodoLists(
+      [...todoLists].map((todoList) => {
+        if (todoList.id === id) {
+          todoList.done = !todoList.done
+        }
+
+        return todoList
+      })
+    )
+  }
 
   return (
     <>
-      <Header
+      <Navbar
         todoLists={todoLists}
         handleAddTodoList={handleAddTodoList}
         handleRemoveTodoList={handleRemoveTodoList}
@@ -58,6 +68,7 @@ const Container = () => {
         currentTodoListIndex={currentTodoListIndex}
         selectedTab={selectedTab}
         setSelectedTab={setSelectedTab}
+        completedTodo={completedTodo}
       />
 
       <TodoList

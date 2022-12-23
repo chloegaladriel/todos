@@ -3,7 +3,7 @@ import classNames from "classnames"
 import Button from "./Button"
 import Optionsbar from "./Optionsbar"
 
-const Header = (props) => {
+const Navbar = (props) => {
   const {
     todoLists,
     setAddTodoListModalOpen,
@@ -74,4 +74,4 @@ const Header = (props) => {
   )
 }
 
-export default Header
+export default Navbar
