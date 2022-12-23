@@ -1,9 +1,6 @@
 import Container from "../components/Container"
 const App = () => {
-
-  return (
-    <Container/>
-    )
+  return <Container />
 }
 
 export default App

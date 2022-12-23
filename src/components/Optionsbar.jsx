@@ -7,18 +7,22 @@ import {
 import Button from "./Button"
 
 const Optionsbar = (props) => {
-  const{handleRemoveTodoList, selectedTab}=props
+
+  const { handleRemoveTodoList, setAddTodoModalOpen } = props
+
   return (
     <div className="flex gap-4 items-center border-t px-4 py-2">
       <div className="flex items-center gap-5 justify-between">
-        <Button variant="icon">
+        <Button variant="icon" onClick={() => setAddTodoModalOpen(true)}>
           <PlusIcon className="h-6 w-6" />
         </Button>
+
         <Button variant="icon">
           <PencilSquareIcon className="h-6 w-6" />
         </Button>
-        <Button variant="icon"  >
-          <TrashIcon className="h-6 w-6"/>
+
+        <Button variant="icon" onClick={handleRemoveTodoList}>
+          <TrashIcon className="h-6 w-6" />
         </Button>
       </div>
       <div className="flex ml-auto items-center">
