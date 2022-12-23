@@ -16,7 +16,7 @@ const TodoList = (props) => {
             <input
               type="checkbox"
               className="ml-4 my-2 h-4 w-4 appearance-none rounded-none border border-slate-200 default:bg-white checked:bg-green-400"
-              onChange={() => completedTodo(todo.id)}
+              onChange={completedTodo}
               checked={todo.done}
             />
             {todo.description}
