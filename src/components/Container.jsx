@@ -1,11 +1,19 @@
-import { useCallback, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import initialTodoLists from "../pages/todosInitialState"
 import AddTodoListModal from "./AddTodoListModal"
 import AddTodoModal from "./AddTodoModal"
 import Navbar from "./Navbar"
 import TodoList from "./TodoList"
+import Button from "./Button"
+import {
+    CheckCircleIcon,
+    PencilSquareIcon,
+    PlusIcon,
+    TrashIcon,
+  } from "@heroicons/react/24/solid"
 
 const Container = () => {
+
   const [todoLists, setTodoLists] = useState(initialTodoLists)
   const [addTodoListModalOpen, setAddTodoListModalOpen] = useState(false)
   const [addTodoModalOpen, setAddTodoModalOpen] = useState(false)
@@ -19,39 +27,56 @@ const Container = () => {
       setTodoLists([
         ...todoLists,
         {
+        id: newId,
           name,
           todos: [],
-          id: newId,
+          
         },
       ])
     },
     [todoLists]
   )
 
-  const handleRemoveTodoList = useCallback(
-    (id) => {
-      setTodoLists([...todoLists].filter((todoList) => todoList.id !== id))
-    },
-    [todoLists]
-  )
+  const handleRemoveTodoList = (todoListIndex) => {
+        console.log(todoListIndex)
+        setTodoLists(todoLists.filter((todoList) => todoList.id !== todoListIndex))
+  }
 
-  const handleAddTodo = useCallback(
-    (todoListId, description) => {
-      const todoList = todoLists.find((todo) => todo.id === todoListId)
+  const handleAddTodo = (description) => {
+      const todoList = todoLists.find((todoList) => todoList.id === currentTodoListIndex)
+      const todoNewId=todoList.todos[todoList.todos.length -1].id + 1
 
-      if (todoList) {
-        const newTodo = {
-          id: todoList.todos.length,
-          description: description,
-          done: false,
+      const otherToDoLists = todoLists.filter((todoList) => todoList.id !== currentTodoListIndex)
+      setTodoLists([
+        ...otherToDoLists,
+        {
+            ...todoList,
+            todos: [
+                ...todoList.todos,
+                {
+                    id: todoNewId,
+                    description,
+                    done: false
+                }
+            ]
         }
-        todoList.todos.push(newTodo)
-      }
-    },
-    [todoLists]
-  )
+     ])
+  }
 
-  const completedTodo = useCallback(
+  const handleRemoveTodo = (id) => {
+    const todoList = todoLists.find((todoList) => todoList.id === currentTodoListIndex)    
+    const otherToDoLists = todoLists.filter((todoList) => todoList.id !== currentTodoListIndex)
+    
+    setTodoLists([
+      ...otherToDoLists,
+      {
+          ...todoList,
+          todos: todoList.todos.filter((todo) => todo.id !== id)
+      }
+   ])
+}
+
+  const handleChange = useCallback(
     (id) => {
       setTodoLists(
         [...todoLists].map((todoList) => {
@@ -80,16 +105,23 @@ const Container = () => {
         currentTodoListIndex={currentTodoListIndex}
         selectedTab={selectedTab}
         setSelectedTab={setSelectedTab}
-        completedTodo={completedTodo}
+        handleChange={handleChange}
       />
 
       <TodoList
-        todoLists={todoLists}
-        currentTodoListIndex={currentTodoListIndex}
+        todoList={todoLists[currentTodoListIndex]}
         handleRemoveTodoList={handleRemoveTodoList}
         selectedTab={selectedTab}
+        handleChange={handleChange}
+        setAddTodoModalOpen={setAddTodoModalOpen}
+        handleRemoveTodo={handleRemoveTodo}
       />
-      <div>
+
+<Button variant="icon" onClick={()=> handleRemoveTodoList(currentTodoListIndex)}>
+          <TrashIcon className="h-6 w-6" />
+        </Button>
+
+            <div>
         {addTodoListModalOpen && (
           <AddTodoListModal
             setAddTodoListModalOpen={setAddTodoListModalOpen}

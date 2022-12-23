@@ -12,14 +12,17 @@ const Navbar = (props) => {
     setSelectedTab,
     setCurrentTodoListIndex,
     currentTodoListIndex,
+    handleRemoveTodoList
   } = props
 
   const PERCENTAGE_BASE = 100
-
+  
   return (
-    <nav className="flex flex-col sticky top-1 bg-white border-b">
-      <div className="flex flex-row items-center overflow-x-scroll sticky top-0 bg-white">
-        {todoLists.map((todoList) => (
+    
+    <div className="flex flex-col sticky top-1 border-b bg-white">
+      <nav>
+      <div className="flex flex-row items-center overflow-x-scroll sticky top-0">
+        {todoLists.sort((todoList1, todoList2) => todoList1.id - todoList2.id).map((todoList) => (
           <Button
             key={todoList.id}
             hasBorderFirst
@@ -65,12 +68,10 @@ const Navbar = (props) => {
         </div>
       </div>
       <div>
-        <Optionsbar
-          currentTodoListIndex={currentTodoListIndex}
-          setAddTodoModalOpen={setAddTodoModalOpen}
-        />
       </div>
-    </nav>
+      </nav>
+    </div>
+    
   )
 }
 

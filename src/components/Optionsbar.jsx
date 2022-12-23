@@ -8,8 +8,9 @@ import Button from "./Button"
 
 const Optionsbar = (props) => {
 
-  const { handleRemoveTodoList, setAddTodoModalOpen } = props
-
+  
+  const { handleRemoveTodoList, setAddTodoModalOpen,  currentTodoListIndex} = props
+  
   return (
     <div className="flex gap-4 items-center border-t px-4 py-2">
       <div className="flex items-center gap-5 justify-between">
@@ -21,7 +22,7 @@ const Optionsbar = (props) => {
           <PencilSquareIcon className="h-6 w-6" />
         </Button>
 
-        <Button variant="icon" onClick={handleRemoveTodoList}>
+        <Button variant="icon" onClick={() => handleRemoveTodoList(currentTodoListIndex)}>
           <TrashIcon className="h-6 w-6" />
         </Button>
       </div>
